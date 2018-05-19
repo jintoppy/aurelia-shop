@@ -1,15 +1,21 @@
 import { inject } from 'aurelia-framework';
 import { CatalogService } from '../catalog.service';
+import { CartService } from '../../cart/cart.service';
 
-@inject(CatalogService)
+@inject(CatalogService, CartService)
 export class ProductList {     
-  constructor(service) {
-    this.service = service;
+  constructor(catalogService, cartService) {
+    this.catalogService = catalogService;
+    this.cartService = cartService;
     this.products = [];
   }
 
+  addToCart(productId){
+    this.cartService.addToCart(productId);
+  }
+
   activate(){
-    this.service.getProducts()
+    this.catalogService.getProducts()
               .then(products => {
                 this.products = products;
               })
