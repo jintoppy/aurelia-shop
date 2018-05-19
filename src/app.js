@@ -12,7 +12,6 @@ export class App {
       }
     ];
     this.el = el;
-    console.log(el);
   }
 
   addUser(){

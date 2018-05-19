@@ -1,10 +1,15 @@
 import environment from './environment';
+import {LogManager} from 'aurelia-framework';
 import {PLATFORM} from 'aurelia-pal';
 import 'babel-polyfill';
 import * as Bluebird from 'bluebird';
+import { CustomLogger } from './customlogger';
 
 // remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
 Bluebird.config({ warnings: { wForgottenReturn: false } });
+
+LogManager.addAppender(new CustomLogger());
+LogManager.setLevel(LogManager.logLevel.debug);
 
 export function configure(aurelia) {
   aurelia.use
