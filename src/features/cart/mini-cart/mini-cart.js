@@ -5,9 +5,23 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 export class MiniCart {     
   count = 0;
   constructor(ea) {
-    this.message = 'Hello world';
+    console.log('within constructor');
     ea.subscribe('addedToCart', (res) => {
       this.count = res;
     });
   }
+
+  created(){
+    console.log('created');
+  }
+
+  bind(){
+    console.log('bind');
+  }
+
+  attached(){
+    console.log('inside attached');
+  }
+
+
 }

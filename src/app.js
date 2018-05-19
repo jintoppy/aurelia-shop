@@ -1,8 +1,28 @@
 import {PLATFORM} from 'aurelia-pal';
+import { inject, TaskQueue } from 'aurelia-framework';
 
+@inject(Element, TaskQueue)
 export class App {
-  constructor() {
+  constructor(el, taskQueue) {
     this.message = 'Hello World!';
+    this.taskQueue = taskQueue;
+    this.users = [
+      {
+        name: 'hi'
+      }
+    ];
+    this.el = el;
+    console.log(el);
+  }
+
+  addUser(){
+    this.users.push({
+      name: 'newuser'
+    });
+    this.taskQueue.queueTask(() => {
+      this.el.querySelector(`li:nth-child(${this.users.length}) input`).focus();
+    });
+    
   }
   configureRouter(config, router) {
     config.title = 'Aurelia Shopping Cart';
